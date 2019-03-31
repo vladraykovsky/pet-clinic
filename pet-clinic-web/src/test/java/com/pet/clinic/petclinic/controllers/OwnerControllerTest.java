@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -47,7 +48,7 @@ class OwnerControllerTest {
 
   @Test
   void listOfOwner() throws Exception {
-
+    when(ownerService.findAll()).thenReturn(owners);
     mockMvc.perform(get("/owners"))
         .andExpect(status().isOk())
         .andExpect(view().name("owners/index"))
