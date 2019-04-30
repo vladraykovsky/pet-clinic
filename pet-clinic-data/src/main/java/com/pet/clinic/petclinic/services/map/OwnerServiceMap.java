@@ -5,6 +5,7 @@ import com.pet.clinic.petclinic.services.OwnerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -45,5 +46,13 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
   @Override
   public Owner save(Owner owner) {
     return super.save(owner);
+  }
+
+  @Override
+  public List<Owner> findAllByLastNameLike(String lastName) {
+    return super.findAll()
+        .stream()
+        .filter( owner -> owner.getFirstName().contains(lastName))
+        .collect(Collectors.toList());
   }
 }
